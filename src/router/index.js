@@ -1,15 +1,43 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Home from 'components/home/home'
+import Category from 'components/category/category'
+import Cart from 'components/cart/cart'
+import Product from 'components/product/product'
+import Personal from 'components/personal/personal'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      path: '/home',
+      name: 'Home',
+      component: Home,
+      children: [{
+        name: 'Home-Product',
+        path: ':id',
+        component: Product
+      }]
+    },
+    {
+      path: '/category',
+      name: 'Category',
+      component: Category
+    },
+    {
+      path: '/cart',
+      name: 'Cart',
+      component: Cart
+    },
+    {
+      path: '/personal',
+      name: 'Personal',
+      component: Personal
+    },
+    {
+      path: '*',
+      redirect: '/home'
     }
   ]
 })

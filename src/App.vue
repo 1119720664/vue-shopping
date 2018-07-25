@@ -1,23 +1,29 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+  <div id="app" class="g-container">
+    <div class="g-view-container">
+      <router-view></router-view>
+    </div>
+    <div class="g-footer-container">
+      <tab-bar></tab-bar>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+  import TabBar from 'base/tab-bar/tab-bar'
+
+  export default {
+    name: 'App',
+    components: {
+      TabBar
+    }
+  }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+  @import "~common/scss/_mixins.scss";
+
+  .router-link-active {
+    color: red
+  }
 </style>
