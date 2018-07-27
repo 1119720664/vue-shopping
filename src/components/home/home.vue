@@ -3,7 +3,9 @@
     <header class="g-header-container">
       <home-header></home-header>
     </header>
-    <div></div>
+    <div>
+      <home-slider :sliders="sliders"></home-slider>
+    </div>
     <div class="backTop"></div>
     <router-view></router-view>
   </div>
@@ -11,10 +13,29 @@
 
 <script type="text/ecmascript-6">
   import HomeHeader from 'base/home-header/home-header'
+  import HomeSlider from 'components/home-slider/home-slider'
+  import { getHomeSlider } from 'api/home'
+
   export default {
     name: 'Home',
+    created() {
+      this._getHomeSlider()
+    },
+    data() {
+      return {
+        sliders: []
+      }
+    },
+    methods: {
+      _getHomeSlider() {
+        getHomeSlider().then(res => {
+          this.sliders = res
+        })
+      }
+    },
     components: {
-      HomeHeader
+      HomeHeader,
+      HomeSlider
     }
   }
 </script>

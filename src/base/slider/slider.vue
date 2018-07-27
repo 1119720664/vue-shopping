@@ -1,30 +1,64 @@
 <template>
-  <swiper>
-    <swiper-slider :options="swiperOption">
-      <slot></slot>
-      <div class="swiper-pagination" v-if="pageination" slot="pageination"></div>
-    </swiper-slider>
+  <swiper :options="swiperOption">
+    <slot></slot>
+    <div class="swiper-pagination" v-if="pagination" slot="pagination"></div>
   </swiper>
 </template>
 
 <script type="text/ecmascript-6">
-  import { swiper, swiperSlider } from 'vue-awesome-swiper'
+  import { swiper } from 'vue-awesome-swiper'
   export default {
     props: {
       direction: {
         type: String,
         default: 'horizontal',
-        validator(value){
+        validator(value) {
           return ['horizontal', 'vertical'].indexOf(value) > -1
+        }
+      },
+      interval: {
+        type: Number,
+        default: 3000
+      },
+      loop: {
+        type: Boolean,
+        default: true
+      },
+      pagination: {
+        type: Boolean,
+        default: true
+      },
+      autoplay: {
+        type: Boolean,
+        default: true
+      }
+    },
+    data() {
+      return {
+        swiperOption: {
+          watchOverflow: true,
+          direction: this.direction,
+          autoplay: this.interval ? {
+            delay: this.interval,
+            disableOnInteraction: false
+          } : false,
+          slidesPerView: 1,
+          loop: this.loop,
+          pagination: {
+            el: this.pagination ? '.swiper-pagination' : null
+          }
         }
       }
     },
     components: {
-      swiper,
-      swiperSlider
+      swiper
     }
   }
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
+  .swiper-container {
+    width: 100%;
+    height: 100%
+  }
 </style>

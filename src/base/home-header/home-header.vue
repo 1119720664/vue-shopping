@@ -1,7 +1,7 @@
 <template>
-  <nav-bar class="header" title="lqlqlqlqlqlqlqlqlqlqlqlqlq">
+  <nav-bar class="header">
     <i class="iconfont icon-scan" slot="left"></i>
-    <div slot="center">搜索框</div>
+    <div slot="center"></div>
     <i class="iconfont icon-msg" slot="right"></i>
   </nav-bar>
 </template>
@@ -20,7 +20,7 @@
   @import "~common/scss//_variables.scss";
 
   .header {
-    background-color: red;
+    background-color: transparent;
     .iconfont {
       color: $icon-color-default;
       font-size: 24px
