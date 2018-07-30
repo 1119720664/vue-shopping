@@ -16,5 +16,11 @@ export const getHomeSlider = () => {
         'picUrl': require('common/image/404.png')
       }
     ]
+  }).then(data => {                    /*返回的数据延迟一秒后返回,则使用一个loading效果*/  //eslint-disable-line
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(data)
+      }, 1000)
+    })
   })
 }

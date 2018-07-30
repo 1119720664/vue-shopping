@@ -1,5 +1,6 @@
 <template>
   <div class="slider-wrapper">
+    <Loading v-if="!sliders.length"></Loading>
     <slider v-if="sliders.length">
       <swiper-slide v-for="(item,index) in sliders" :key="index">
         <a :href="item.linkUrl" class="slider-link">
@@ -13,6 +14,7 @@
 <script type="text/ecmascript-6">
   import Slider from 'base/slider/slider'
   import { swiperSlide } from 'vue-awesome-swiper'
+  import Loading from 'base/loading/loading'
 
   export default {
     name: 'HomeSlider',
@@ -29,7 +31,8 @@
     },
     components: {
       swiperSlide,
-      Slider
+      Slider,
+      Loading
     }
   }
 </script>

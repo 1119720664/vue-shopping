@@ -17,7 +17,7 @@
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-  @import "~common/scss//_variables.scss";
+  @import "~common/scss/_variables.scss";
 
   .header {
     background-color: transparent;
