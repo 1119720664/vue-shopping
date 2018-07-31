@@ -22,7 +22,16 @@
       sliders: {
         type: Array,
         default() {
-          return []
+          return {
+            direction: 'vertical',
+            slidesPerView: 'auto',
+            freeMode: true,
+            setWrapperSize: true,
+            scrollbar: {
+              el: this.scrollbar ? '.swiper-scrollbar' : null,
+              hide: true
+            }
+          }
         }
       }
     },

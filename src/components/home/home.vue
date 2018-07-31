@@ -3,9 +3,9 @@
     <header class="g-header-container">
       <home-header></home-header>
     </header>
-    <div>
+    <Scroll>
       <home-slider :sliders="sliders"></home-slider>
-    </div>
+    </Scroll>
     <div class="backTop"></div>
     <router-view></router-view>
   </div>
@@ -14,6 +14,7 @@
 <script type="text/ecmascript-6">
   import HomeHeader from 'base/home-header/home-header'
   import HomeSlider from 'components/home-slider/home-slider'
+  import Scroll from 'base/scroll/scroll'
   import { getHomeSlider } from 'api/home'
 
   export default {
@@ -35,7 +36,8 @@
     },
     components: {
       HomeHeader,
-      HomeSlider
+      HomeSlider,
+      Scroll
     }
   }
 </script>
