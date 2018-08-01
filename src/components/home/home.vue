@@ -6,6 +6,7 @@
     <Scroll>
       <home-slider :sliders="sliders"></home-slider>
       <nav-item></nav-item>
+      <recommend :recommends="recommends"></recommend>
     </Scroll>
     <div class="backTop"></div>
     <router-view></router-view>
@@ -16,17 +17,22 @@
   import HomeHeader from 'base/home-header/home-header'
   import HomeSlider from 'components/home-slider/home-slider'
   import NavItem from 'base/nav/nav'
+  import Recommend from 'base/recommend/recommend'
   import Scroll from 'base/scroll/scroll'
-  import { getHomeSlider } from 'api/home'
+  import { getHomeSlider, getHomeRecommend } from 'api/home'
 
   export default {
     name: 'Home',
     created() {
       this._getHomeSlider()
+      this._getHomeRecommend()
     },
     data() {
       return {
-        sliders: []
+        sliders: [],
+        curPage: 1,
+        totalPage: 1,
+        recommends: []
       }
     },
     methods: {
@@ -34,13 +40,26 @@
         getHomeSlider().then(res => {
           this.sliders = res
         })
+      },
+      _getHomeRecommend() {
+        if (this.curPage > this.totalPages) {
+          return
+        }
+        getHomeRecommend(this.curPage).then(res => {
+          if (res) {
+            this.curPage++
+            this.totalPage = res.totalPage
+            this.recommends = this.recommends.concat(res.itemList)
+          }
+        })
       }
     },
     components: {
       HomeHeader,
       HomeSlider,
       Scroll,
-      NavItem
+      NavItem,
+      Recommend
     }
   }
 </script>

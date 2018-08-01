@@ -15,7 +15,7 @@ export default new Router({
       name: 'Home',
       component: Home,
       children: [{
-        name: 'Home-Product',
+        name: 'HomeProduct',
         path: ':id',
         component: Product
       }]
