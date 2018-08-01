@@ -5,6 +5,7 @@
     </header>
     <Scroll>
       <home-slider :sliders="sliders"></home-slider>
+      <nav-item></nav-item>
     </Scroll>
     <div class="backTop"></div>
     <router-view></router-view>
@@ -14,6 +15,7 @@
 <script type="text/ecmascript-6">
   import HomeHeader from 'base/home-header/home-header'
   import HomeSlider from 'components/home-slider/home-slider'
+  import NavItem from 'base/nav/nav'
   import Scroll from 'base/scroll/scroll'
   import { getHomeSlider } from 'api/home'
 
@@ -37,7 +39,8 @@
     components: {
       HomeHeader,
       HomeSlider,
-      Scroll
+      Scroll,
+      NavItem
     }
   }
 </script>
