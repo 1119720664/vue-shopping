@@ -7,7 +7,7 @@
     <ul class="recommend-list" v-if="recommends.length">
       <li class="recommend-item" v-for="(item,index) in recommends" :key="index">
         <router-link class="recommend-link" :to="{name:'HomeProduct',params:{id:item.baseinfo.itemId}}" tag="div">
-          <p class="recommend-pic"><img class="recommend-img" :src="item.baseinfo.picUrlNew"></p>
+          <p class="recommend-pic"><img class="recommend-img" v-lazy="item.baseinfo.picUrlNew"></p>
           <p class="recommend-name">{{item.name.shortName}}</p>
           <p class="recommend-origPrice">
             <del>¥{{item.price.origPrice}}</del>

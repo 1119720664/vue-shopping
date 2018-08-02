@@ -3,7 +3,7 @@
     <header class="g-header-container">
       <home-header></home-header>
     </header>
-    <Scroll>
+    <Scroll :data="recommends" pullDown @pull-down="ScrollRefresh">
       <home-slider :sliders="sliders"></home-slider>
       <nav-item></nav-item>
       <recommend :recommends="recommends"></recommend>
@@ -52,6 +52,11 @@
             this.recommends = this.recommends.concat(res.itemList)
           }
         })
+      },
+      ScrollRefresh(end) {
+        setTimeout(() => {
+          end()
+        }, 1000)
       }
     },
     components: {

@@ -40,7 +40,7 @@ export const getHomeRecommend = (page = 1, psize = 20) => {
       return new Promise(resolve => {
         setTimeout(() => {
           resolve(data)
-        }, 13)
+        }, 1000)
       })
     })
   /*当总页数大于当前页数的时候,在then下做处理并且返回,这个不做配置*/ //eslint-disable-line

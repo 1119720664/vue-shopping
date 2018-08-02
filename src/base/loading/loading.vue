@@ -5,7 +5,7 @@
         <img src="../../common/image/loading.gif">
       </slot>
     </span>
-    <span class="mine-loading-text" v-if="text">{{text}}</span>
+    <span class="mine-loading-text" v-if="loadingText">{{loadingText}}</span>
   </div>
 </template>
 
@@ -29,9 +29,24 @@
         default: false
       }
     },
+    data() {
+      return {
+        loadingText: this.text
+      }
+    },
     computed: {
       inlineIcon() {
         return this.inline ? 'mine-loading-inline' : null
+      }
+    },
+    methods: {
+      setText(text) {
+        this.loadingText = text
+      }
+    },
+    watch: {
+      text(text) {
+        this.loadingText = text
       }
     }
   }
