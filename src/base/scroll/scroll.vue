@@ -41,6 +41,7 @@
     },
     data() {
       return {
+        pulling: false,
         pullDownText: '在拉,在拉就刷给你看',
         swiperOption: {
           direction: 'vertical',
@@ -64,6 +65,9 @@
       },
       scroll() {
         const swiper = this.$refs.swiper.swiper
+        if (this.pulling) {
+          return
+        }
         if (swiper.translate > 0) {   /*下拉*/   //eslint-disable-line
           if (!this.pullDown) {
             return
@@ -82,18 +86,22 @@
           if (!this.pullDown) {
             return
           }
-          //swiper.allowTouchMove = false
+          this.pulling = true
+          /*swiper.allowTouchMove = false*/   //eslint-disable-line
           /*不可以触摸或者回弹等其他动作*/ //eslint-disable-line
-          //swiper.setTransition(swiper.params.speed)
-          //swiper.setTranslate(this.PULL_DOWN_HEIGHT)
+          /*swiper.setTransition(swiper.params.speed)*/   //eslint-disable-line
+          swiper.setTranslate(this.PULL_DOWN_HEIGHT)   //eslint-disable-line
           this.$refs.pullDownLoading.setText(this.PULL_DOWN_TEXT_ING)
           this.$emit('pull-down', this.pullDownEnd)
         }
       },
       pullDownEnd() {
+        const swiper = this.$refs.swiper.swiper
         /*可以触摸或者回弹等其他动作*/ //eslint-disable-line
         console.log(15965)
+        this.pulling = false
         this.$refs.pullDownLoading.setText(this.PULL_DOWN_TEXT_END)
+        swiper.setTranslate(0)   //eslint-disable-line
       }
     },
     components: {

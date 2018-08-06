@@ -1,7 +1,7 @@
 <template>
   <div class="slider-wrapper">
     <Loading v-if="!sliders.length"></Loading>
-    <slider v-if="sliders.length">
+    <slider v-if="sliders.length" :sliders="sliders">
       <swiper-slide v-for="(item,index) in sliders" :key="index">
         <a :href="item.linkUrl" class="slider-link">
           <img :src="item.picUrl" class="slider-img"/>

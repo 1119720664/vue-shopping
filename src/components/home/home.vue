@@ -37,7 +37,7 @@
     },
     methods: {
       _getHomeSlider() {
-        getHomeSlider().then(res => {
+        return getHomeSlider().then(res => {
           this.sliders = res
         })
       },
@@ -54,9 +54,10 @@
         })
       },
       ScrollRefresh(end) {
-        setTimeout(() => {
+        this._getHomeSlider().then(() => {
+            console.log(this.sliders)
           end()
-        }, 1000)
+        })
       }
     },
     components: {

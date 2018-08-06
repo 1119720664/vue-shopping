@@ -1,5 +1,5 @@
 <template>
-  <swiper :options="swiperOption">
+  <swiper :options="swiperOption" :keyId="keyId">
     <slot></slot>
     <div class="swiper-pagination" v-if="pagination" slot="pagination"></div>
   </swiper>
@@ -30,7 +30,13 @@
       },
       autoplay: {
         type: Boolean,
-        default: true
+        default: false
+      },
+      sliders: {
+        type: Array,
+        default() {
+          return []
+        }
       }
     },
     data() {
@@ -43,15 +49,27 @@
             disableOnInteraction: false
           } : false,
           slidesPerView: 1,
-          loop: this.loop,
+          loop: this.sliders.length === 1 ? false : this.loop,
           pagination: {
             el: this.pagination ? '.swiper-pagination' : null
           }
-        }
+        },
+        keyId: Math.random()
       }
     },
     components: {
       swiper
+    },
+    watch: {
+      sliders(newData) {
+        if (!newData) {
+          return
+        }
+        this.loop = this.sliders.length === 1 ? false : this.loop   /*没次刷新都要修改loop的值*/ //eslint-disable-line
+        console.log(this.loop)
+        this.keyId = Math.random()
+        console.log(this.keyId)
+      }
     }
   }
 </script>
