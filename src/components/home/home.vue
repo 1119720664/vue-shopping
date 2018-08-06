@@ -3,7 +3,7 @@
     <header class="g-header-container">
       <home-header></home-header>
     </header>
-    <Scroll :data="recommends" pullDown @pull-down="ScrollRefresh">
+    <Scroll :data="recommends" pullDown @pull-down="ScrollRefresh" pullUp @pull-up="pullUpMore">
       <home-slider :sliders="sliders"></home-slider>
       <nav-item></nav-item>
       <recommend :recommends="recommends"></recommend>
@@ -45,7 +45,7 @@
         if (this.curPage > this.totalPages) {
           return
         }
-        getHomeRecommend(this.curPage).then(res => {
+        return getHomeRecommend(this.curPage).then(res => {
           if (res) {
             this.curPage++
             this.totalPage = res.totalPage
@@ -55,7 +55,11 @@
       },
       ScrollRefresh(end) {
         this._getHomeSlider().then(() => {
-            console.log(this.sliders)
+          end()
+        })
+      },
+      pullUpMore(end) {
+        this._getHomeRecommend().then(() => {
           end()
         })
       }
