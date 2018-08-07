@@ -125,7 +125,7 @@
       color: #999
     }
     .loading-container {
-      padding-top: 100px
+      padding-top: 150px
     }
   }
 </style>

@@ -1,14 +1,17 @@
 <template>
   <div class="home">
     <header class="g-header-container">
-      <home-header></home-header>
+      <home-header :class="{'header-transition':isHeaderTransition}" ref="header"></home-header>
     </header>
-    <Scroll :data="recommends" pullDown @pull-down="ScrollRefresh" pullUp @pull-up="pullUpMore">
+    <Scroll :data="recommends" pullDown @pull-down="ScrollRefresh" pullUp @pull-up="pullUpMore" @scroll-end="scrollEnd"
+            ref="scroll" @scroll="scroll">
       <home-slider :sliders="sliders"></home-slider>
       <nav-item></nav-item>
       <recommend :recommends="recommends"></recommend>
     </Scroll>
-    <div class="backTop"></div>
+    <div class="g-backtop-container">
+      <back-top :visible="isBacktopVisible" @backTop="backTop"></back-top>
+    </div>
     <router-view></router-view>
   </div>
 </template>
@@ -19,6 +22,7 @@
   import NavItem from 'base/nav/nav'
   import Recommend from 'base/recommend/recommend'
   import Scroll from 'base/scroll/scroll'
+  import BackTop from 'base/back-top/back-top'
   import { getHomeSlider, getHomeRecommend } from 'api/home'
 
   export default {
@@ -26,13 +30,16 @@
     created() {
       this._getHomeSlider()
       this._getHomeRecommend()
+      this.HEADER_HEIGHT = 100
     },
     data() {
       return {
         sliders: [],
         curPage: 1,
         totalPage: 1,
-        recommends: []
+        recommends: [],
+        isBacktopVisible: false,
+        isHeaderTransition: false
       }
     },
     methods: {
@@ -62,6 +69,24 @@
         this._getHomeRecommend().then(() => {
           end()
         })
+      },
+      scrollEnd(translate, scroll) {
+        this.isBacktopVisible = translate < 0 && -translate > scroll.height
+        this.changeHeaderStateStatus(translate)
+      },
+      backTop() {
+        this.$refs.scroll.scrollToTop(300)
+      },
+      changeHeaderStateStatus(translate) {
+        if (translate >= -30) {
+          this.$refs.header.hide()
+          return
+        }
+        this.$refs.header.show()
+        this.isHeaderTransition = -translate > this.HEADER_HEIGHT
+      },
+      scroll(translate) {
+        this.changeHeaderStateStatus(translate)
       }
     },
     components: {
@@ -69,7 +94,8 @@
       HomeSlider,
       Scroll,
       NavItem,
-      Recommend
+      Recommend,
+      BackTop
     }
   }
 </script>
