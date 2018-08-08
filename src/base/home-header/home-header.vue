@@ -10,6 +10,7 @@
 
 <script type="text/ecmascript-6">
   import NavBar from 'base/nav-bar/nav-bar'
+
   export default {
     name: 'HomeHeader',
     data() {
