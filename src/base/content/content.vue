@@ -6,7 +6,7 @@
       </div>
     </div>
     <scroll ref="scroll">
-      <div class="content">
+      <div class="content" >
         <div class="pic" v-if="content.banner">
           <a :href="content.banner.linkUrl" class="pic-link">
             <img :src="content.banner.picUrl" alt="" class="pic-img"/>
@@ -57,8 +57,11 @@
       },
       getContent(id) {
         getCategoryContent(id).then(res => {
+          if (!res) {
+            return
+          }
           this.content = res.content
-            this.isLoading = true
+          this.isLoading = true
         })
       }
     },
