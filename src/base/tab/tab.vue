@@ -1,11 +1,14 @@
 <template>
-  <scroll :scrollbar="false">
-    <ul class="tab">
-      <li class="tab-item" :class="{'tab-item-active':item.id === currentID}" v-for="(item,index) in items" :key="index"
-          @click="switchTab(item.id)">{{item.name}}
-      </li>
-    </ul>
-  </scroll>
+  <div class="tabScroll" ref="Tab">
+    <scroll :scrollbar="false" :data="items" ref="scroll">
+      <ul class="tab">
+        <li class="tab-item" :class="{'tab-item-active':item.id === currentID}" v-for="(item,index) in items"
+            :key="index"
+            @click="switchTab(item.id)">{{item.name}}
+        </li>
+      </ul>
+    </scroll>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
@@ -36,20 +39,46 @@
         }
         this.currentID = id
         this.$emit('switch-tab', id)
+      },
+      handleScrolllist(items) {
+        const bottom = items.length > 0 ? '50px' : ''
+        this.$refs.Tab.style.bottom = bottom
+        this.$refs.scroll.fresh()
       }
+    },
+    mounted() {
+      setTimeout(() => {
+        this.handleScrolllist(this.items)
+      }, 20)
     },
     components: {
       Scroll
+    },
+    watch: {
+      items(newVal) {
+        this.handleScrolllist(newVal)
+      }
     }
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss" scoped>
   @import "~common/scss/_mixins.scss";
+  @import "~common/scss/_variables.scss";
 
   $tab-item-height: 46px;
+
+  .tabScroll {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height:100%
+  }
+
   .tab {
     width: 100%;
+
     &-item {
       height: $tab-item-height;
       background-color: #fff;
@@ -66,10 +95,11 @@
         border-bottom: none;
       }
     }
+
     &-item-active {
       background: none;
       border-right: none;
-      color: #f23030
+      color: #f23030;
     }
   }
 

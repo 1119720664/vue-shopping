@@ -74,7 +74,7 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss" scoped>
   .swiper-container {
     width: 100%;
     height: 100%

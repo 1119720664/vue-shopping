@@ -5,8 +5,8 @@
         <loading></loading>
       </div>
     </div>
-    <scroll ref="scroll">
-      <div class="content" >
+    <scroll ref="scroll" :data="content.data">
+      <div class="content">
         <div class="pic" v-if="content.banner">
           <a :href="content.banner.linkUrl" class="pic-link">
             <img :src="content.banner.picUrl" alt="" class="pic-img"/>
@@ -18,7 +18,7 @@
             <li class="section-item" v-for="(item,i) in section.itemList" :key="i">
               <a :href="item.linkUrl" class="section-link">
                 <p class="section-pic" v-if="item.picUrl">
-                  <img v-lazy="item.picUrl" class="section-img" alt="">
+                  <img v-lazy="item.picUrl" class="section-img" @load="updateScroll">
                 </p>
                 <p class="section-name">{{item.name}}</p>
               </a>
@@ -61,8 +61,11 @@
             return
           }
           this.content = res.content
-          this.isLoading = true
+          this.isLoading = false
         })
+      },
+      updateScroll() {
+         this.$refs.scroll.fresh()
       }
     },
     components: {
@@ -82,13 +85,14 @@
   @import "~common/scss/_mixins.scss";
 
   .content-wrapper {
-    position: relative;
     height: 100%;
+    position: relative;
+    width: 100%
   }
 
   .loading-container {
     position: absolute;
-    top: 50%;
+    top: 0;
     left: 0;
     z-index: $category-popup-z-index;
     @include flex-center();
