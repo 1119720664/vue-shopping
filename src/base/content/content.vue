@@ -35,6 +35,10 @@
   import Scroll from 'base/scroll/scroll'
   import BackTop from 'base/back-top/back-top'
   import { getCategoryContent } from 'api/category'
+  /* eslint-disable */
+ // import { CATEGORY_CONTENT_KEY, CATEGORY_CONTENT_UPDATE_TIME_INTERVAL } from 'common/js/config'  //eslint-disable-line
+  //import storge from 'common/js/storage'  //eslint-disable-line
+  /* eslint-enable */
 
   export default {
     name: 'Content',
@@ -56,6 +60,23 @@
         this.$refs.scroll.scrollToTop(300)
       },
       getContent(id) {
+        /* eslint-disable */
+       /* let contents = storge.get(CATEGORY_CONTENT_KEY)
+        let updateTime
+        const curTime = new Date().getTime()
+        if (contents && contents[id]) {
+          updateTime = contents[id].updateTime || 0
+          if (curTime - updateTime <= CATEGORY_CONTENT_UPDATE_TIME_INTERVAL) {
+            return this.getContentByLocalStorage(contents[id])
+          } else {
+            return this.getContentByHttp().then(() => {
+              this.updateLocalStorage(contents, id, curTime)
+            })
+          }
+        } else {
+
+        }*/
+        /* eslint-enable */
         getCategoryContent(id).then(res => {
           if (!res) {
             return
@@ -65,7 +86,16 @@
         })
       },
       updateScroll() {
-         this.$refs.scroll.fresh()
+        this.$refs.scroll.fresh()
+      },
+      getContentByLocalStorage() {
+
+      },
+      getContentByHttp() {
+
+      },
+      updateLocalStorage() {
+
       }
     },
     components: {

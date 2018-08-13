@@ -41,8 +41,8 @@
     }
     &-right {
       margin-right: 10px;
-      position: absolute;
-      right: 0;
+     /* position: absolute;
+      right: 0;*/
       @include flex-center();
       height: 100%
     }
