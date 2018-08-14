@@ -155,3 +155,6 @@ export const categoryNames = [
     'id': 'WQ2002'
   }
 ]
+
+/*搜索的页面*/  //eslint-disable-line
+export const SEARCH_HISTORY_KEYWORD_KEY = `${prefix}-history-keyword-${suffix}`
