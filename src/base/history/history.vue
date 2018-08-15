@@ -2,12 +2,12 @@
   <div class="history" v-if="keywords.length">
     <h4 class="history-title">历史搜索</h4>
     <transition-group class="g-list" name="list" tag="ul">
-      <li class="g-list-item" v-for="item in keywords" :key="item">
+      <li class="g-list-item" v-for="item in keywords" :key="item" @click="$_selectItem(item)">
         <span class="g-list-text">{{item}}</span>
         <i class="iconfont icon-delete" @click.stop="removeItem(item)"></i>
       </li>
     </transition-group>
-    <a href="javascript:void(0)">
+    <a href="javascript:void(0)" @click="showConfirm">
       <i class="iconfont icon-clear"></i>
       清空历史搜索
     </a>
@@ -41,6 +41,10 @@
       },
       clear() {
         storge.remove(SEARCH_HISTORY_KEYWORD_KEY)
+        this.getKeyword()
+      },
+      showConfirm() {
+        this.$emit('showConfirm')
       }
     }
   }

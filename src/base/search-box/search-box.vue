@@ -15,8 +15,8 @@
     name: 'SearchBox',
     props: {
       fake: {
-          type: Boolean,
-          default: false
+        type: Boolean,
+        default: false
       },
       placeholder: {
         type: String,
@@ -42,6 +42,7 @@
     },
     watch: {
       query: debounce(function () {
+        console.log(this)
         this.$emit('query', this.query)
       })
     }
