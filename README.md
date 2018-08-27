@@ -1,4 +1,8 @@
-# vue-shopping
+## 介绍:
+[![Build Status](https://travis-ci.org/1119720664/vue-shopping.svg?branch=master)](https://travis-ci.org/1119720664/vue-shopping)
+## 开始使用
+1.安装
+# shopping
 
 > A Vue.js project
 
@@ -28,3 +32,16 @@ npm test
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+## 文档
+
+## 提问
+
+## 变更记录
+
+## 安装
+
+## 联系方式
+
+## 贡献代码
